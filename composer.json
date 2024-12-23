@@ -1,6 +1,6 @@
 {
   "name": "tabsl/tabsldhltracking",
-  "description": "OXID eShop module for DHL carrier tracking",
+  "description": "OXID eShop module for DHL parcel tracking.",
   "type": "oxideshop-module",
   "license": [
     "proprietary"

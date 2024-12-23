@@ -19,7 +19,7 @@ $psModuleName = '<b>tabsl</b>DhlTracking';
 $psModuleVersion = '1.0.0';
 
 // tabsl module description
-$psModuleDesc = 'DHL Senungsinformationen im Adminbereich anzeigen.';
+$psModuleDesc = 'OXID eShop module for DHL parcel tracking.';
 
 /**
  * Module information
