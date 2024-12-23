@@ -13,6 +13,7 @@
 
 namespace Tabsl\DhlTracking\Model;
 
+use OxidEsales\Eshop\Core\DatabaseProvider;
 use OxidEsales\Eshop\Core\Registry;
 
 /**
@@ -54,22 +55,30 @@ class Order extends Order_parent
      */
     public function updateTabslDhl()
     {
-
         $trackingNumber = $this->oxorder__oxtrackcode->value;
+        $trackingNumber = str_replace(' ', '', $trackingNumber);
+        // only take the first tracking number if multiple are present
+        if (strpos($trackingNumber, ',') !== false || strpos($trackingNumber, ';') !== false) {
+            $parts = preg_split('/[,;]/', $trackingNumber);
+            $trackingNumber = $parts[0];
+        }
+
         if (!$trackingNumber) {
             return false;
         }
 
         $apiKey = $this->getConfig()->getConfigParam('tabsldhltracking_api_key');
         $apiUrl = $this->getConfig()->getConfigParam('tabsldhltracking_api_url');
+        $senderCountry = $this->getConfig()->getConfigParam('tabsldhltracking_senderCountry');
         if (!$apiKey || !$apiUrl) {
             return false;
         }
 
         $deliveryZip = $this->oxorder__oxbillzip->value;
-        $deliveryCountry = $this->oxorder__oxbillcountry->value;
-        $deliveryCountry = 'DE';
-        $senderCountry = 'DE';
+        $deliveryCountryId = $this->oxorder__oxdelcountryid->value != '' ? $this->oxorder__oxdelcountryid->value : $this->oxorder__oxbillcountryid->value;
+
+        $sql = "SELECT oxisoalpha2 FROM oxcountry WHERE oxid = " . DatabaseProvider::getDb()->quote($deliveryCountryId);
+        $deliveryCountry = DatabaseProvider::getDb()->getOne($sql);
 
         $url = sprintf(
             '%s?trackingNumber=%s&recipientPostalCode=%s&language=de&requesterCountryCode=%s&originCountryCode=%s',
@@ -104,7 +113,9 @@ class Order extends Order_parent
 
         $jsonData = json_decode($response, true);
 
-        #print_r($jsonData);
+        if (!$jsonData) {
+            return false;
+        }
 
         $deliveryDate = null;
         if ($jsonData['shipments'][0]['status']['statusCode'] == "delivered") {
@@ -113,7 +124,6 @@ class Order extends Order_parent
 
         $this->oxorder__tabsldhltracking_deliverydate = new \OxidEsales\Eshop\Core\Field($deliveryDate);
         $this->oxorder__tabsldhltracking_info = new \OxidEsales\Eshop\Core\Field($response);
-
         $this->save();
 
         return true;

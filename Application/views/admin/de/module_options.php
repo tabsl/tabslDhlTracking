@@ -16,4 +16,5 @@ $aLang = [
     'charset' => 'UTF-8',
     'SHOP_MODULE_tabsldhltracking_api_key' => 'DHL API Key (Customer Key)',
     'SHOP_MODULE_tabsldhltracking_api_url' => 'DHL API URL',
+    'SHOP_MODULE_tabsldhltracking_senderCountry' => 'Absenderland',
 ];

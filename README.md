@@ -19,8 +19,9 @@ Add DHL api key (customer key) to the module settings in the admin panel.
 
 ## Changelog
 
-    2024-12-23	1.0.0	initial release
+    2024-12-23	1.0.2	fix parcel country, check multiple parcel numbers
     2024-12-23	1.0.1	fix namespace path
+    2024-12-23	1.0.0	initial release
 
 ## License
 
