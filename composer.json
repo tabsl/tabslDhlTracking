@@ -17,7 +17,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Tabsl\\DhlTracking\\": "./source/modules/tabsl/tabslDhlTracking"
+      "Tabsl\\DhlTracking\\": "../../../source/modules/tabsl/tabslDhlTracking"
     }
   },
   "extra": {
