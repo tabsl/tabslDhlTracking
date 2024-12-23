@@ -67,9 +67,11 @@ class Order extends Order_parent
             return false;
         }
 
+        $debug = $this->getConfig()->getConfigParam('tabsldhltracking_debug');
         $apiKey = $this->getConfig()->getConfigParam('tabsldhltracking_api_key');
         $apiUrl = $this->getConfig()->getConfigParam('tabsldhltracking_api_url');
         $senderCountry = $this->getConfig()->getConfigParam('tabsldhltracking_senderCountry');
+
         if (!$apiKey || !$apiUrl) {
             return false;
         }
@@ -89,6 +91,10 @@ class Order extends Order_parent
             $senderCountry
         );
 
+        if ($debug) {
+            Registry::get('oxUtilsView')->addErrorToDisplay($url);
+        }
+
         $curl = curl_init();
         curl_setopt_array($curl, [
             CURLOPT_URL => $url,
@@ -106,6 +112,10 @@ class Order extends Order_parent
 
         $response = curl_exec($curl);
         curl_close($curl);
+
+        if ($debug) {
+            Registry::get('oxUtilsView')->addErrorToDisplay($response);
+        }
 
         if (!$response) {
             return false;

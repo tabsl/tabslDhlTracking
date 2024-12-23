@@ -9,7 +9,7 @@
             <input type="text" class="editinput" size="20" maxlength="[{$edit->oxorder__tabsldhltracking_deliverydate->fldmax_length}]" name="editval[oxorder__tabsldhltracking_deliverydate]" value="[{$edit->oxorder__tabsldhltracking_deliverydate->value}]" [{ $readonly }]>
             &nbsp; <a href="[{ $oViewConf->getSelfLink() }]cl=order_main&fnc=updateTabslDhl&oxid=[{ $edit->oxorder__oxid->value }]">aktualisieren</a>
             <br><br>
-            [{if $edit->oxorder__tabsldhltracking_deliverydate->value}]
+            [{if $edit->oxorder__tabsldhltracking_info->value}]
                 <a href="javascript:void(0);" onclick="toggleVisibility('dhlEvents')">&rarr; Ereignisse anzeigen</a>
                 <div id="dhlEvents" style="display: none;">
                     [{assign var="events" value=$edit->getTabslDhlEvents()}]
