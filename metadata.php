@@ -16,7 +16,7 @@ $sMetadataVersion = '2.1';
 // tabsl module id
 $psModuleId = 'tabslDhlTracking';
 $psModuleName = '<b>tabsl</b>DhlTracking';
-$psModuleVersion = '1.1.0';
+$psModuleVersion = '1.1.1';
 
 // tabsl module description
 $psModuleDesc = 'OXID eShop module for DHL parcel tracking.';

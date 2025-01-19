@@ -20,6 +20,7 @@ Add DHL api key (customer key) to the module settings in the admin panel.
 
 ## Changelog
 
+    2024-01-19	1.1.1	remove php require
     2024-01-19	1.1.0	improve parcel events, add parcel status
     2024-12-23	1.0.3	add debug option
     2024-12-23	1.0.2	fix parcel country, check multiple parcel numbers
