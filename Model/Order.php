@@ -50,7 +50,7 @@ class Order extends Order_parent
         $data = $this->oxorder__tabsldhltracking_info->rawValue;
         if (!empty($data)) {
             $data = json_decode($data, true);
-            return $data['shipments'][0]['status'];
+            return array_merge($data['shipments'][0]['status'], ['estimatedTimeOfDelivery' => $data['shipments'][0]['estimatedTimeOfDelivery']]);
         }
         return null;
     }
