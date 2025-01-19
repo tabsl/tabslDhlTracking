@@ -10,12 +10,14 @@
             &nbsp; <a href="[{ $oViewConf->getSelfLink() }]cl=order_main&fnc=updateTabslDhl&oxid=[{ $edit->oxorder__oxid->value }]">aktualisieren</a>
             <br><br>
             [{if $edit->oxorder__tabsldhltracking_info->value}]
+                [{assign var="status" value=$edit->getTabslDhlStatus()}]
+                <b>Status: <span style="color: [{if $status.statusCode == "failure"}]red[{else}]green[{/if}];">[{$status.description}]</b><br>
                 <a href="javascript:void(0);" onclick="toggleVisibility('dhlEvents')">&rarr; Ereignisse anzeigen</a>
                 <div id="dhlEvents" style="display: none;">
                     [{assign var="events" value=$edit->getTabslDhlEvents()}]
                     [{if $events}]
                         [{foreach name=events from=$events item=event}]
-                            [{$event.date}] - [{$event.status}]<br>
+                            [{$event.timestamp|date_format:"%d.%m.%Y %H:%M"}] - [{$event.description}]<br>
                         [{/foreach}]
                         <br>
                     [{/if}]

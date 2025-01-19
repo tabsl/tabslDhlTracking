@@ -20,6 +20,9 @@
       "Tabsl\\DhlTracking\\": "../../../source/modules/tabsl/tabslDhlTracking"
     }
   },
+  "require": {
+    "php": ">=7.4"
+  },
   "extra": {
     "oxideshop": {
       "target-directory": "tabsl/tabslDhlTracking"

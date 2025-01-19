@@ -4,7 +4,8 @@ OXID eShop module for DHL parcel tracking.
 
 - Get parcel tracking information from DHL api and save to database.
 - Save delivery date, if parcel is delivered.
-- Show parcel events in admin order page.
+- Show parcel status in admin order page.
+- Show all parcel events in admin order page.
 - Show all parcel information in admin order page.
 
 ![tabsldhltracking.jpg](tabsldhltracking.jpg)
@@ -19,10 +20,13 @@ Add DHL api key (customer key) to the module settings in the admin panel.
 
 ## Changelog
 
+    2024-01-19	1.1.0	improve parcel events, add parcel status
     2024-12-23	1.0.3	add debug option
     2024-12-23	1.0.2	fix parcel country, check multiple parcel numbers
     2024-12-23	1.0.1	fix namespace path
     2024-12-23	1.0.0	initial release
+
+Module for OXID 6.x with smarty (but only admin), so it can be used with own template (twig) in OXID 7.x also.
 
 ## License
 
@@ -41,5 +45,5 @@ Add DHL api key (customer key) to the module settings in the admin panel.
 
 ## Copyright
 
-	Tobias Merkl | 2024
+	Tobias Merkl | 2025
 	https://oxid-module.eu

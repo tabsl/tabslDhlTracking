@@ -22,6 +22,11 @@ use OxidEsales\Eshop\Core\Registry;
 class Order extends Order_parent
 {
 
+    /**
+     * Get all parcel events
+     *
+     * @return array
+     */
     public function getTabslDhlEvents()
     {
         $infos = [];
@@ -29,15 +34,31 @@ class Order extends Order_parent
         if (!empty($data)) {
             $data = json_decode($data, true);
             foreach ($data['shipments'][0]['events'] as $event) {
-                $infos[] = [
-                    'date' => date_format(date_create($event['timestamp']), 'd.m.Y H:i'),
-                    'status' => $event['description'],
-                ];
+                $infos[] = $event;
             }
         }
         return $infos;
     }
 
+    /**
+     * Get latest parcel status
+     *
+     * @return mixed|null
+     */
+    public function getTabslDhlStatus()
+    {
+        $data = $this->oxorder__tabsldhltracking_info->rawValue;
+        if (!empty($data)) {
+            $data = json_decode($data, true);
+            return $data['shipments'][0]['status'];
+        }
+        return null;
+    }
+
+    /**
+     * Get full parcel information
+     * @return void
+     */
     public function getTabslDhlInfo()
     {
         $data = $this->oxorder__tabsldhltracking_info->rawValue;
@@ -51,6 +72,8 @@ class Order extends Order_parent
     }
 
     /**
+     * Update parcel information in database
+     *
      * @return bool
      */
     public function updateTabslDhl()
