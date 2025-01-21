@@ -33,8 +33,10 @@ class Order extends Order_parent
         $data = $this->oxorder__tabsldhltracking_info->rawValue;
         if (!empty($data)) {
             $data = json_decode($data, true);
-            foreach ($data['shipments'][0]['events'] as $event) {
-                $infos[] = $event;
+            if ($data['shipments']) {
+                foreach ($data['shipments'][0]['events'] as $event) {
+                    $infos[] = $event;
+                }
             }
         }
         return $infos;
@@ -50,7 +52,9 @@ class Order extends Order_parent
         $data = $this->oxorder__tabsldhltracking_info->rawValue;
         if (!empty($data)) {
             $data = json_decode($data, true);
-            return array_merge($data['shipments'][0]['status'], ['estimatedTimeOfDelivery' => $data['shipments'][0]['estimatedTimeOfDelivery']]);
+            if ($data['shipments']) {
+                return array_merge($data['shipments'][0]['status'], ['estimatedTimeOfDelivery' => $data['shipments'][0]['estimatedTimeOfDelivery']]);
+            }
         }
         return null;
     }
